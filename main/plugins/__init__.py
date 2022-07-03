@@ -4,6 +4,11 @@ import inspect, re, asyncio, time, sys, os
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
+import requests
+import feedparser
+
+from bs4 import BeautifulSoup as bs
+from pySmartDL import SmartDL
 from ..fast_telethon import uploader, downloader
 
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
@@ -119,3 +124,25 @@ async def eor(event, text=None, **args):
 async def eod(event, text=None, **kwargs):
     kwargs["time"] = kwargs.get("time", 8)
     return await eor(event, text, **kwargs)
+
+def get_download_links(link):
+ session = requests.Session()
+ args = {}
+ cookies = {}
+ cookies["gogoanime"] = "hg9f7phuvd6ccm79k51unu6c62"
+ cookies["auth"] = "aplnqLxgJbgtaoyFayGHsnA8ndd8z0BnmuGGwYwDl8BgPk3udnmsQsbW%2B4jXcmkfayLPOTXcZHip799T%2FTkUyg%3D%3D"
+ r = session.get(link, cookies=cookies)
+ soup = bs(r.text, "lxml")
+ download_div = soup.find("div", "cf-download").findAll("a")
+ for links in download_div:
+  dl_link = links["href"]
+  quality = links.text.strip().split("x")[1]
+  if quality == "360":
+   args["360p"] = dl_link
+  elif quality == "480":
+   args["480p"] = dl_link
+  elif quality == "720":
+   args["720p"] = dl_link
+  elif quality == "1080":
+   args["1080p"] = dl_link
+ return args
