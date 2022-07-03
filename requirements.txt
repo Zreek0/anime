@@ -1,6 +1,7 @@
 mautrix
 python-dotenv
 sqlalchemy
+pySmartDL
 psycopg2-binary
 telethon
 cryptg
