@@ -10,12 +10,12 @@ from config import Config
 
 LOGS = logging.getLogger(__name__)
 
-Config.DB_URI = Config.get("DB_URI")
+Config.DB_URI = Config.get("DB_URI") or Config.get("DATABASE_URL")
 def start() -> scoped_session:
     database_url = (
-        Config.get("DB_URI").replace("postgres:", "postgresql:")
-        if "postgres://" in Config.get("DB_URI")
-        else Config.get("DB_URI")
+        Config.DB_URI.replace("postgres:", "postgresql:")
+        if "postgres://" in Config.DB_URI
+        else Config.DB_URI
     )
     engine = create_engine(database_url)
     BASE.metadata.bind = engine
