@@ -8,6 +8,7 @@ cryptg
 pyrogram
 tgcrypto
 requests
+lxml
 bs4
 feedparser
 apscheduler
