@@ -7,4 +7,4 @@ pyrogram
 tgcrypto
 requests
 bs4
-cloudscraper
+feedparser
