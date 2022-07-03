@@ -2,7 +2,7 @@ mautrix
 sqlalchemy
 psycopg2-binary
 telethon
-tgcrypt
+cryptg
 pyrogram
 tgcrypto
 requests
