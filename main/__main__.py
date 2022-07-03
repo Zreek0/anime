@@ -15,6 +15,7 @@ for name in files:
 		p = Path(f.name)
 		plugin_name = p.stem
 		load_plugins(plugin_name.replace(".py", ""))
+app.start()
 if __name__ == "__main__":
 	bot.run_until_disconnected()
 	logger.info("✦ Successfully Deployed Bot")
