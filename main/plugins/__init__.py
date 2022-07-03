@@ -6,6 +6,8 @@ from telethon import events
 from asyncio import sleep
 import requests
 import feedparser
+import lxml
+import lxml.etree
 
 from bs4 import BeautifulSoup as bs
 from pySmartDL import SmartDL
