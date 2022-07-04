@@ -1,5 +1,5 @@
 from AnilistPython import Anilist
-from apscheduler import AsyncIOScheduler
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from . import *
 
 def eng_name(search_value: str):
