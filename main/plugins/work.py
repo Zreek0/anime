@@ -9,6 +9,7 @@ def eng_name(search_value: str):
 	return eng_name
 	
 fix = []
+chat = -1001448819386
 async def update_gogoanime():
 	feed = feedparser.parse("https://raw.githubusercontent.com/ArjixGamer/gogoanime-rss/main/gogoanime/gogoanime-rss-sub.xml")
 	entry = feed.entries[0]
