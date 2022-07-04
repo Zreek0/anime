@@ -1,6 +1,6 @@
 from main import *
 
-import inspect, re, asyncio, time, sys, os, ffmpeg, logging
+import inspect, re, asyncio, tim, sys, os, ffmpeg, logging, random
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
@@ -151,9 +151,11 @@ def get_download_links(link):
    args["1080p"] = dl_link
  return args
 
+timelist = [100, 11, 10]
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
-    time = float(probe['streams'][0]['duration']) // 11
+    dividing_time = random.choice(timelist)
+    time = float(probe['streams'][0]['duration']) // dividing_choice
     width = probe['streams'][0]['width']
     try:
         (
