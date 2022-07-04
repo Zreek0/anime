@@ -14,7 +14,7 @@ chat = -1001448819386
 async def update_gogoanime():
 	feed = feedparser.parse("https://raw.githubusercontent.com/ArjixGamer/gogoanime-rss/main/gogoanime/gogoanime-rss-sub.xml")
 	entry = feed.entries[0]
-	if entry.title != fix:
+	if not entry.title == fix:
 		addgvar("GOGO_RSS", entry.title)
 		entry.link = entry.link.replace("gogoanime.vc", "gogoanime.lu")
 		download_links = get_download_links(entry.link)
