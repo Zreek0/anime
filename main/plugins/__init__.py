@@ -1,6 +1,6 @@
 from main import *
 
-import inspect, re, asyncio, tim, sys, os, ffmpeg, logging, random
+import inspect, re, asyncio, time, sys, os, ffmpeg, logging, random
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
