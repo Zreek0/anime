@@ -1,6 +1,6 @@
 from main import *
 
-import inspect, re, asyncio, time, sys, os
+import inspect, re, asyncio, time, sys, os, ffmpeg, logging
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
@@ -16,6 +16,8 @@ from ..fast_telethon import uploader, downloader
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
+
+LOGS = logging.getLogger(__name__)
 SUDOS = (5038395271, 5370531116, 5074055497)
 async def bash(cmd, run_code=0):
     """
@@ -148,3 +150,22 @@ def get_download_links(link):
   elif quality == "1080":
    args["1080p"] = dl_link
  return args
+
+def generate_thumbnail(in_filename, out_filename):
+    probe = ffmpeg.probe(in_filename)
+    time = float(probe['streams'][0]['duration']) // 11
+    print(time)
+    width = probe['streams'][0]['width']
+    try:
+        (
+            ffmpeg
+            .input(in_filename, ss=time)
+            .filter('scale', width, -1)
+            .output(out_filename, vframes=1)
+            .overwrite_output()
+            .run(capture_stdout=True, capture_stderr=True)
+        )
+    except ffmpeg.Error as e:
+        LOGS.error(e.stderr.decode(), file=sys.stderr)
+    return out_filename
+
