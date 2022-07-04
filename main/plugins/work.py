@@ -34,7 +34,7 @@ async def update_gogoanime():
 			os.remove(thumb)
 		if "720p" in download_links:
 			dllink = download_links.get("720p")
-			name = "[@Ongoing_Seasonal_Anime] " + name + " (720p).mp4"
+			name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (720p).mp4"
 			name = os.path.join(os.getcwd(), name)
 			file = SmartDL(dllink, name, progress_bar=False)
 			file.start()
