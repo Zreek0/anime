@@ -154,7 +154,6 @@ def get_download_links(link):
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
     time = float(probe['streams'][0]['duration']) // 11
-    print(time)
     width = probe['streams'][0]['width']
     try:
         (
