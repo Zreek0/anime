@@ -155,7 +155,7 @@ timelist = [100, 11, 10]
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
     dividing_time = random.choice(timelist)
-    time = float(probe['streams'][0]['duration']) // dividing_choice
+    time = float(probe['streams'][0]['duration']) // dividing_time
     width = probe['streams'][0]['width']
     try:
         (
