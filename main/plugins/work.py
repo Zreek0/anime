@@ -59,4 +59,4 @@ async def update_gogoanime():
 			
 scheduler = AsyncIOScheduler()
 scheduler.add_job(update_gogoanime, "interval", minutes=1)
-scheduler.start()
+scheduler
