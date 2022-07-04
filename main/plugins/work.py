@@ -15,7 +15,7 @@ async def update_gogoanime():
 	entry = feed.entries[0]
 	if not entry.link in fix:
 		fix.append(entry.link)
-		feed.link = entry.link.replace("gogoanime.vc", "gogoanime.lu")
+		entry.link = entry.link.replace("gogoanime.vc", "gogoanime.lu")
 		download_links = get_download_links(entry.link)
 		qq = await bot.send_message(-1001568226560, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 		mess = await qq.reply("`Processing ...`")
