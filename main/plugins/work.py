@@ -18,7 +18,7 @@ async def update_gogoanime():
 		addgvar("GOGO_RSS", entry.name)
 		entry.link = entry.link.replace("gogoanime.vc", "gogoanime.lu")
 		download_links = get_download_links(entry.link)
-		qq = await bot.send_message(-1001568226560, "**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})**\n")
+		qq = await bot.send_message(-1001568226560, "**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 		mess = await qq.reply("`Processing ...`")
 		if "1080p" in download_links:
 			dllink = download_links.get("1080p")
