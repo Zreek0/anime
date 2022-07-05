@@ -20,7 +20,7 @@ async def update_gogoanime(i:str = rss_links[0]):
 		return 
 	entry = feed.entries[0]
 	if entry.title != db.get(i).link:
-		entry.link = entry.link.replace("e.vc", "e.lu")
+		entry.link = entry.link.replace(".vc", ".lu")
 		await upload_gogoanime(entry, entry.link, -1001568226560, -1001726115978)
 		db.update(i, entry.title)
 	else:
