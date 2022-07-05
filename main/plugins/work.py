@@ -31,7 +31,6 @@ async def u_gogo(i:str = rss_links[0]):
 	return
 scheduler = AsyncIOScheduler()
 scheduler.add_job(u_gogo, "interval", minutes=1)
-scheduler.start()
-	
+scheduler
 	
 	
