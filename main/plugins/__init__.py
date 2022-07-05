@@ -176,7 +176,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 	try:
 		q = get_download_links(gogolink)
 	except Exception as e:
-		logger.info(e)
+		LOG.exception(e)
 		q = None
 	if not q:
 		return None
