@@ -169,9 +169,6 @@ def generate_thumbnail(in_filename, out_filename):
     except ffmpeg.Error as e:
         LOGS.error(e.stderr.decode(), file=sys.stderr)
     return out_filename
-
-from . import *
-
 async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 	try:
 		q = get_download_links(gogolink)
@@ -182,6 +179,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		return None
 	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 	mess = await qq.reply("`Processing...`")
+	thumb = False
 	if q.get("1080p"):
 		dllink = q.get("1080p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (1080p).mp4"
@@ -201,7 +199,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		path = os.path.join(os.getcwd(), name)
 		obj = SmartDL(dllink, path, progress_bar=False)
 		obi.start()
-		thumb = generate_thumbnail(path, name + ".jpg")
+		thumb = generate_thumbnail(path, name + ".jpg") if not thumb else thumb
 		caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** 720p\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 		xx = await uploader(name, name, time.time(), mess, "Uploading... " + name)
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
@@ -214,10 +212,11 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		path = os.path.join(os.getcwd(), name)
 		obj = SmartDL(dllink, path, progress_bar=False)
 		obi.start()
-		thumb = generate_thumbnail(path, name + ".jpg")
+		thumb = generate_thumbnail(path, name + ".jpg") if not thumb else thumb
 		caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** 480p\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 		xx = await uploader(name, name, time.time(), mess, "Uploading... " + name)
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
 		return True
+
