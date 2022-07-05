@@ -30,7 +30,7 @@ async def update_gogoanime(i:str = rss_links[0]):
 		print(f"Checked : {entry.link}")
 	return
 scheduler = AsyncIOScheduler()
-scheduler.add_job(update_gogoanime, "interval", minutes=5)
+scheduler.add_job(update_gogoanime, "interval", minutes=1)
 scheduler.start()
 	
 	
