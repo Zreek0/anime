@@ -172,14 +172,14 @@ def generate_thumbnail(in_filename, out_filename):
 
 async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 	q = get_download_links(gogolink)
-	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({gogolink})\n")
+	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 	mess = await qq.reply("`Processing...`")
 	if q.get("1080p"):
 		dllink = q.get("1080p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (1080p).mp4"
 		path = os.path.join(os.getcwd(), name)
 		obj = SmartDL(dllink, path, progress_bar=False)
-		obj.start()
+		obi.start()
 		thumb = generate_thumbnail(path, name + ".jpg")
 		caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** 1080p\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 		xx = await uploader(name, name, time.time(), mess, "Uploading... " + name)
@@ -191,7 +191,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (720p).mp4"
 		path = os.path.join(os.getcwd(), name)
 		obj = SmartDL(dllink, path, progress_bar=False)
-		obj.start()
+		obi.start()
 		thumb = generate_thumbnail(path, name + ".jpg")
 		caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** 720p\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 		xx = await uploader(name, name, time.time(), mess, "Uploading... " + name)
@@ -203,11 +203,15 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (480p).mp4"
 		path = os.path.join(os.getcwd(), name)
 		obj = SmartDL(dllink, path, progress_bar=False)
-		obj.start()
+		obi.start()
 		thumb = generate_thumbnail(path, name + ".jpg")
 		caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** 480p\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 		xx = await uploader(name, name, time.time(), mess, "Uploading... " + name)
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
+	if q: 
+		return True
+	else:
+		return False
 	
