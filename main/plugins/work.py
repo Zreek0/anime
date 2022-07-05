@@ -8,9 +8,9 @@ def eng_name(search_value: str):
 	anime = anilist.get_anime(search_value)
 	eng_name = str(anime["name_english"])
 	return eng_name
-rss_link = []
-rss_link.append("https://raw.githubusercontent.com/ArjixGamer/gogoanime-rss/main/gogoanime/gogoanime-rss-sub.xml")
-for i in rss_link:
+rss_links = []
+rss_links.append("https://raw.githubusercontent.com/ArjixGamer/gogoanime-rss/main/gogoanime/gogoanime-rss-sub.xml")
+for i in rss_links:
 	if db.get(i) == None:
 		db.update(i, "*")
 
