@@ -180,7 +180,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 	mess = await qq.reply("`Processing...`")
 	thumb = False
-	if q.get("1080p"):
+	if q and q.get("1080p"):
 		dllink = q.get("1080p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (1080p).mp4"
 		path = os.path.join(os.getcwd(), name)
@@ -192,7 +192,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
-	if q.get("720p"):
+	if q and q.get("720p"):
 		dllink = q.get("720p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (720p).mp4"
 		path = os.path.join(os.getcwd(), name)
@@ -204,7 +204,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
-	if q.get("480p"):
+	if q and q.get("480p"):
 		dllink = q.get("480p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (480p).mp4"
 		path = os.path.join(os.getcwd(), name)
