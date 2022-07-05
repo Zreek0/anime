@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Numeric, Boolean
-from sql import SESSION, BASE
+from . import SESSION, BASE
 
 class animebase(BASE):
     __tablename__ = "animebase"
