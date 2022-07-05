@@ -170,8 +170,16 @@ def generate_thumbnail(in_filename, out_filename):
         LOGS.error(e.stderr.decode(), file=sys.stderr)
     return out_filename
 
+from . import *
+
 async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
-	q = get_download_links(gogolink)
+	try:
+		q = get_download_links(gogolink)
+	except Exception as e:
+		print(e)
+		q = None
+	if not q:
+		return None
 	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
 	mess = await qq.reply("`Processing...`")
 	if q.get("1080p"):
@@ -186,6 +194,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
+		return True
 	if q.get("720p"):
 		dllink = q.get("720p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (720p).mp4"
@@ -198,6 +207,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
+		return True
 	if q.get("480p"):
 		dllink = q.get("480p")
 		name = "[@Ongoing_Seasonal_Anime] " + entry.title + " (480p).mp4"
@@ -210,8 +220,4 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		await bot.send_file(upload_chat, xx, thumb=thumb, caption=caption, supports_streaming=True)
 		os.remove(thumb)
 		os.remove(path)
-	if q: 
 		return True
-	else:
-		return False
-	
