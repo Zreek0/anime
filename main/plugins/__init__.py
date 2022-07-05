@@ -172,7 +172,7 @@ def generate_thumbnail(in_filename, out_filename):
 
 async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 	q = get_download_links(gogolink)
-	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({entry.link})\n")
+	qq = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime -**\n[{entry.title}]({gogolink})\n")
 	mess = await qq.reply("`Processing...`")
 	if q.get("1080p"):
 		dllink = q.get("1080p")
