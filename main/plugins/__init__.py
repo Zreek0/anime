@@ -218,3 +218,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		os.remove(path)
 	return bool(q)
 
+def rdownload(link, file: str):
+ r = requests.get(link, stream=True)
+ with open(file, "wb") as f:
+  f.write(r.content)
