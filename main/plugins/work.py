@@ -14,7 +14,7 @@ for i in rss_links:
 	if db.get(i) == None:
 		db.update(i, "*")
 
-async def update_gogoanime(i):
+async def update_gogoanime(i:str = rss_links[0]):
 	feed = feedparser.parse(i)
 	if len(feed.entries) == 0:
 		return 
@@ -28,9 +28,7 @@ async def update_gogoanime(i):
 	return
 
 scheduler = AsyncIOScheduler()
-for i in rss_links:
-	ugogo = update_gogoanime(i)
-	scheduler.add_job(ugogo, "interval", minutes=5)
+scheduler.add_job(update_gogoanime, "interval", minutes=5)
 scheduler.start()
 	
 	
