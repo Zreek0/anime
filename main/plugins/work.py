@@ -51,6 +51,6 @@ async def h20_feed():
 			await eor(mess, f"**Error :** `{e}`")
 
 scheduler = AsyncIOScheduler()
-scheduler.add_job(h20_feed, "interval", minutes=5)
+scheduler.add_job(h20_feed, "interval", minutes=1)
 scheduler.start()
 			
