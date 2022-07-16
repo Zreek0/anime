@@ -32,12 +32,12 @@ async def u_gogo(i:str = rss_links[0]):
 	
 	
 async def h20_feed():
-	h20 = h20()
-	if not h20:
-		return logger.info("Update not found on Hentai20.com")
-	title = h20.get("title")
-	link = h20.get("link")
-	ch = h20.get("ch")
+	hm = h20()
+	if not hm:
+		logger.info("Update not found on Hentai20.com")
+	title = hm.get("title")
+	link = hm.get("link")
+	ch = hm.get("ch")
 	if link != db.get("H20").link:
 		mess = await bot.send_message(-1001568226560, f"**New pornhwa chapter uploaded on Hentai20.com -**\n\n• [{title.title()}]({link})")
 		try:
