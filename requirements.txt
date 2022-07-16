@@ -15,3 +15,5 @@ apscheduler
 ffmpeg-python
 AnilistPython 
 reportlab
+cloudscraper
+img2pdf
