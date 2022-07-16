@@ -29,8 +29,5 @@ async def u_gogo(i:str = rss_links[0]):
 	else:
 		print(f"Checked : {entry.link}")
 	return
-scheduler = AsyncIOScheduler()
-scheduler.add_job(u_gogo, "interval", minutes=1)
-scheduler
 	
 	
