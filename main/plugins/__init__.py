@@ -218,7 +218,7 @@ async def upload_gogoanime(entry, gogolink, notif_chat, upload_chat):
 		os.remove(path)
 	return bool(q)
 
-def download(url, filename, headers=None):
+def download(url, filename, headers):
 	r = requests.get(url, headers=headers, stream=True)
 	r.raise_for_status()
 	with open(filename, "wb") as file:
