@@ -52,5 +52,4 @@ async def h20_feed():
 
 scheduler = AsyncIOScheduler()
 scheduler.add_job(h20_feed, "interval", seconds=1)
-scheduler.start()
 			
