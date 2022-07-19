@@ -157,12 +157,8 @@ def get_download_links(link):
 
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
-    time = float(probe['streams'][0]['duration'])
-    start_time = int(time) - 1
-    start_time = int(time) - start_time
-    end_time = int(time)-1
-    timelist = [range(start_time, end_time)]
-    time = random.choice(timelist)
+    dt = random.choice([1, 10, 11, 111, 100])
+    time = float(probe['streams'][0]['duration']) // dt
     width = probe['streams'][0]['width']
     try:
         (
