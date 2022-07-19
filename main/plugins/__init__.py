@@ -163,7 +163,7 @@ def generate_thumbnail(in_filename, out_filename):
     end_time = int(time)-1
     timelist = [range(start_time, end_time)]
     time = random.choice(timelist)
-    width = probe['streams'][0]['width'] // time
+    width = probe['streams'][0]['width']
     try:
         (
             ffmpeg
