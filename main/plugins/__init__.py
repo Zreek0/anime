@@ -208,23 +208,19 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 		q = get_download_links(entry.link)
 	except Exception as e:
 		LOGS.info(e)
-		return None
+		return False
 	thumb = None
 	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link})")
-	text = m.text
-	await m.pin()
 	for i in q:
 		try:
 			link = q.get(i)
 			fname = "./[@Ongoing_Anime_Seasons] " + entry.title + f" {i}.mp4"
-			f, d = await fast_download(link, fname, headers=dict(Referer=entry.link), progress_callback=lambda d, t: asyncio.get_event_loop().create_task(progress(d, t, m, time.time(), f"Downloading {i} from {link}"))) 
+		        await fast_download(link, fname, headers=dict(Referer=entry.link)) 
 			thumb = generate_thumbnail(fname, fname+".jpg") if not thumb else thumb
 			caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** {i}\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 			await app.send_video(upload_chat, fname, caption=caption, thumb=thumb)
 			os.remove(fname)
 		except Exception as e:
 			await m.edit(f"**Error :** `{e}`")
-	await m.edit(text)
-	await m.unpin()
 	os.remove(thumb)
-	return q
+	return bool(q)
