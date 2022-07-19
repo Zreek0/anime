@@ -4,7 +4,7 @@ import inspect, re, asyncio, time, sys, os, ffmpeg, logging, random, shutil
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
-import asyncuo
+import asyncio
 import requests
 import feedparser
 import lxml
