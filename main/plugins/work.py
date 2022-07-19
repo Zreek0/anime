@@ -18,8 +18,8 @@ async def u_gogo(rss_link=rss):
 	if entry.title != db.get(rss_link).link:
 		q = get_download_links(entry.link)
 		if len(q) < 2:
-			return "Checked : " + entry.link
-			break
+			print("Checked : " + entry.link)
+			return
 		op = await upload_gogoanime(entry, -1001568226560, -1001633233596)
 		db.update(rss_link, entry.title)
 	else:
