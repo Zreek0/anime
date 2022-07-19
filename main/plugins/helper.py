@@ -40,7 +40,7 @@ def create_pdf(path, images: list):
 
 	pdf.save()
 
-async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
+def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
 	pdfname = f"./Chapter {chno} {name}" + " @Adult_Mangas.pdf"
