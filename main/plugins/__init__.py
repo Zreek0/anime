@@ -209,7 +209,7 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 		LOGS.info(e)
 		return None
 	thumb = None
-	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link})"
+	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link}"),
 	for i in q:
 		try:
 			link = q.get(i)
