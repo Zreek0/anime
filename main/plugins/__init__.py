@@ -215,7 +215,7 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 		try:
 			link = q.get(i)
 			fname = "./[@Ongoing_Anime_Seasons] " + entry.title + f" {i}.mp4"
-		        await fast_download(link, fname, headers=dict(Referer=entry.link)) 
+			await fast_download(link, fname, headers=dict(Referer=entry.link)) 
 			thumb = generate_thumbnail(fname, fname+".jpg") if not thumb else thumb
 			caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** {i}\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
 			await app.send_video(upload_chat, fname, caption=caption, thumb=thumb)
