@@ -20,7 +20,7 @@ from ..fast_telethon import uploader, downloader, progress
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
-
+from telethon.helpers import _maybe_await
 LOGS = logging.getLogger(__name__)
 SUDOS = (5038395271, 5370531116, 5074055497)
 async def bash(cmd, run_code=0):
