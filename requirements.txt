@@ -17,3 +17,4 @@ AnilistPython
 reportlab
 cloudscraper
 img2pdf
+aiofiles
