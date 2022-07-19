@@ -154,12 +154,16 @@ def get_download_links(link):
    args["1080p"] = dl_link
  return args
 
-timelist = [100, 11, 10]
+
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
-    dividing_time = random.choice(timelist)
-    time = float(probe['streams'][0]['duration']) // 10
-    width = probe['streams'][0]['width']
+    time = float(probe['streams'][0]['duration']).split(".")[0]
+    start_time = time - 1
+    start_time = time - start_time
+    end_time = time-1
+    timelist = [range(start_time, end_time)]
+    time = random.choice(timelist)
+    width = probe['streams'][0]['width'] // time
     try:
         (
             ffmpeg
@@ -209,11 +213,11 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 		LOGS.info(e)
 		return None
 	thumb = None
-	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link})")
+	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link})"
 	for i in q:
 		try:
 			link = q.get(i)
-			fname = "./[@Ongoing_Anime_Seasons]" + entry.title + f" {i}.mp4"
+			fname = "./[@Ongoing_Anime_Seasons] " + entry.title + f" {i}.mp4"
 			await fast_download(link, fname, headers=dict(Referer=entry.link))
 			thumb = generate_thumbnail(fname, fname+".jpg") if not thumb else thumb
 			caption = f"**{entry.title}**\n\n**• Qᴜᴀʟɪᴛʏ :** {i}\n**• ᴀᴜᴅɪᴏ :** Japanese\n**• ꜱᴜʙᴛɪᴛʟᴇꜱ :** English"
