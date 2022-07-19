@@ -21,7 +21,7 @@ async def u_gogo(rss_link=rss):
 			return "Checked : " + entry.link
 			break
 		op = await upload_gogoanime(entry, -1001568226560, -1001633233596)
-		db.update(rss_link, entry.link)
+		db.update(rss_link, entry.title)
 	else:
 		print(f"Checked : {entry.link}")
 	return
