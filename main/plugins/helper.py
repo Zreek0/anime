@@ -55,7 +55,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	elif "toonily" in link:
 		r = scraper.get(link)
 	else:
-		r = requests.get(link)
+		r = scraper.get(link)
 		r.raise_for_status()
 	soup = BeautifulSoup(r.text, "html.parser")
 	image_links = soup.find_all("img", class_)
@@ -65,7 +65,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		with ThreadPoolExecutor(max_workers=8) as executor:
+		with ThreadPoolExecutor(max_workers=9) as executor:
 			executor.submit(download, i, file.name, dict(Referer=r.url))
 		images.append(file.name)
 	with open(pdfname, "wb") as f:
