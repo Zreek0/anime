@@ -208,7 +208,7 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 		q = get_download_links(entry.link)
 	except Exception as e:
 		LOGS.info(e)
-		return False
+		return
 	thumb = None
 	m = await bot.send_message(notif_chat, f"**New anime uploaded on gogoanime.pe -**\n\n• [{entry.title}]({entry.link})")
 	for i in q:
