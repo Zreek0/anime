@@ -55,7 +55,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	elif "toonily" in link:
 		r = scraper.get(link)
 	else:
-		r = scraper.get(link)
+		r = requests.get(link)
 		r.raise_for_status()
 	soup = BeautifulSoup(r.text, "html.parser")
 	image_links = soup.find_all("img", class_)
