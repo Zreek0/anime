@@ -97,3 +97,12 @@ def h20():
  args["ch"] = match.group(1)
  return args
 
+class u_manga:
+ def __init__(self):
+  r = requests.get("https://manganato.com/genre-all")
+  soup = BeautifulSoup(r.text, "html.parser")
+  data = soup.find("a", "genres-item-chap text-nowrap a-h")
+  regex = r"[^.]hapter.* (\d+)"
+  self.title = data["title"].split("Chapter")[0].strip()
+  self.link = data["href"]
+  self.chapter = re.match(regex, data.text).group(1)
