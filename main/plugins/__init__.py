@@ -177,6 +177,7 @@ def generate_thumbnail(in_filename, out_filename):
 def download(url, filename, headers):
 	r = requests.get(url, headers=headers, stream=True)
 	r.raise_for_status()
+	r.raw.decode_content = True
 	with open(filename, "wb") as file:
 		shutil.copyfileobj(r.raw, file)
 		file.close()
