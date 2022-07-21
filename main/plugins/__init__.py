@@ -158,7 +158,7 @@ def get_download_links(link):
 
 def generate_thumbnail(in_filename, out_filename):
     probe = ffmpeg.probe(in_filename)
-    dt = random.choice([1, 10, 11, 111, 100])
+    dt = random.choice([1, 10, 11, 100])
     time = float(probe['streams'][0]['duration']) // dt
     width = probe['streams'][0]['width']
     try:
@@ -223,5 +223,5 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 			os.remove(fname)
 		except Exception as e:
 			await m.edit(f"**Error :** `{e}`")
-	os.remove(thumb)
+	os.remove(thumb) if thumb else None
 	return bool(q)
