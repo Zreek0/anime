@@ -223,5 +223,5 @@ async def upload_gogoanime(entry, notif_chat, upload_chat):
 			os.remove(fname)
 		except Exception as e:
 			await m.edit(f"**Error :** `{e}`")
-	os.remove(thumb) if thumb else None
+	os.remove(thumb)
 	return bool(q)
