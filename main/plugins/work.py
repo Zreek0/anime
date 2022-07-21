@@ -17,7 +17,7 @@ async def u_gogo(rss_link=rss):
 	entry = feed.entries[0]
 	if entry.title != db.get(rss_link).link:
 		q = get_download_links(entry.link)
-		if len(q) == 0:
+		if len(q) == 1:
 			print("Checked : " + entry.link)
 			return
 		db.update(rss_link, entry.title)
@@ -27,5 +27,5 @@ async def u_gogo(rss_link=rss):
 	return
 
 scheduler = AsyncIOScheduler()
-scheduler.add_job(u_gogo, "interval", seconds=30, max_instances=3)
+scheduler.add_job(u_gogo, "interval", seconds=1, max_instances=5)
 scheduler.start()
