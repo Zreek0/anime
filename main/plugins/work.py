@@ -20,12 +20,12 @@ async def u_gogo(rss_link=rss):
 		if len(q) == 0:
 			print("Checked : " + entry.link)
 			return
-		op = await upload_gogoanime(entry, -1001568226560, -1001633233596)
 		db.update(rss_link, entry.title)
+		op = await upload_gogoanime(entry, -1001568226560, -1001633233596)
 	else:
 		print(f"Checked : {entry.link}")
 	return
 
 scheduler = AsyncIOScheduler()
-scheduler.add_job(u_gogo, "interval", seconds=30)
+scheduler.add_job(u_gogo, "interval", seconds=30, max_instances=3)
 scheduler.start()
