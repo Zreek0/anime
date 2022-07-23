@@ -79,23 +79,25 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	shutil.rmtree(upr)
 	return pdfname
 
-def h20(): 
- args = dict()
- r = cloudscraper.create_scraper().get("https://Hentai20.com/")
- r.raise_for_status()
- soup = BeautifulSoup(r.text, "html.parser")
- data = soup.find("div", "c-blog-listing c-page__content manga_content").find("a")
- args["title"] = data["title"]
- link = None
- data_link = soup.find_all("a", href=re.compile(data["href"]))
- data_link.remove(data_link[0])
- data_link.remove(data_link[0])
- args["link"] = data_link[0]["href"]
- ch_input = data_link[0].string.strip()
- ch_regex = r"[^.]hapter (\d+)"
- match = re.match(ch_regex, ch_input)
- args["ch"] = match.group(1)
- return args
+class h20:
+ def __init__(self):
+  response = requests.get("https://hentai20.com/")
+  response.raise_for_status()
+  soup = BeautifulSoup(response.text, "html.parser")
+  data = soup.find("div", "item-summary").find("a")
+  self.title = data.text
+  self.links = []
+  self.chapters = []
+  new_data = soup.find_all("span", "c-new-tag")
+  for n in new_data:
+   n = n.find("a", href=re.compile(data["href"]))
+   if n:
+    self.links.append(n["href"])
+    regex = r"{}.*chapter.*-(\d+)".format(data["href"])
+    self.chapters.append(re.match(regex, n["href"]).group(1))
+    continue
+  self.chapters.reverse()
+  self.links.reverse()
 
 class u_manga:
  def __init__(self):
