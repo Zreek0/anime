@@ -48,5 +48,5 @@ async def u_h20():
 		print(f"Already Uploaded : {feed.title}")
 	return
 scheduler = AsyncIOScheduler()
-scheduler.add_job(u_h20, "interval", seconds=10, max_instances=5)
+scheduler.add_job(u_h20, "interval", seconds=5, max_instances=5)
 scheduler.start()
