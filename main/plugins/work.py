@@ -46,6 +46,6 @@ async def u_h20():
 	return
 
 scheduler = AsyncIOScheduler()
-scheduler.add_job(u_h20, "interval", seconds=1, max_instances=5)
+#scheduler.add_job(u_h20, "interval", seconds=1, max_instances=5)
 scheduler.add_job(u_gogo, "interval", seconds=1, max_instances=5)
 scheduler.start()
