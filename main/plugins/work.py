@@ -45,7 +45,7 @@ async def u_h20():
 		db.update("H20", feed.title)
 		await upload_h20(feed, -1001568226560, -1001676231026)
 	else:
-		print(f"Checked : {feed.title}")
+		print(f"Already Uploaded : {feed.title}")
 	return
 scheduler = AsyncIOScheduler()
 scheduler.add_job(u_h20, "interval", seconds=1, max_instances=5)
