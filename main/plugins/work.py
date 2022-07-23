@@ -34,7 +34,7 @@ async def upload_h20(h20, chat, upload_chat):
 	for link, ch in zip(h20.links, h20.chapters):
 		try:
 			pdfname = await post_ws(link, h20.title, ch)
-			await app.send_document(upload_chat, pdfname, caption="**{} - Chapter {}**\n\n__Auto Uploaded From : Hentai20.com__".format(h20.title, ch))
+			await app.send_document(upload_chat, pdfname, caption="**{} - Chapter {}**\n\n__Auto Uploaded From Hentai20.com__".format(h20.title, ch))
 			os.remove(pdfname)
 		except Exception as e:
 			await post.edit(f"**Error :** `{e}`")
