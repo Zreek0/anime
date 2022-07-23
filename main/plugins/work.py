@@ -26,6 +26,19 @@ async def u_gogo(rss_link=rss):
 		print(f"Checked : {entry.link}")
 	return
 
+async def upload_h20(h20, chat, upload_chat):
+	mess = "**New Chapter uploaded on hentai20.com :**\n\n"
+	for link, ch in zip(h20.links, h20.chapters):
+		mess += f"• [{h20.title} - Chapter {ch}]({link})\n"
+	post = await bot.send_message(chat, post)
+	for link, ch in zip(h20.links, h20.chapters):
+		try:
+			pdfname = await post_ws(link, h20.title, ch)
+			await app.send_document(upload_chat, pdfname, caption="**{}**".format(h20.title))
+			os.remove(pdfname)
+		except Exception as e:
+			await post.edit(f"**Error :** `{e}`")
+
 async def u_h20():
 	hentai_20 = h20()
 	for link in hentai_20.links:
