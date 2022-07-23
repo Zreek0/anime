@@ -40,25 +40,14 @@ async def upload_h20(h20, chat, upload_chat):
 			await post.edit(f"**Error :** `{e}`")
 
 async def u_h20():
-	hentai_20 = h20()
-	for link in hentai_20.links:
-		if link != db.get("H20").link:
-			db.update("H20", link)
-			try:
-				regex = r"{}.*chapter.*-(\d+)".format("https://hentai20.com/")
-				ch = re.match(regex, link).group(1)
-				pdfname = await post_ws(link, hentai_20.title, ch)
-				await app.send_document(-1001676231026, pdfname)
-				os.remove(pdfname)
-			except Exception as e:
-				await app.send_message(-1001676231026, f"**Error :** `{e}`")
-				pass
-		else:
-			print(f"Checked : {hentai_20.title}")
-			break
+	feed = h20()
+	if feed.title != db.get("H20").link:
+		db.update("H20", feed.title)
+		await upload_h20(feed, -1001568226560, -1001676231026)
+	else:
+		print(f"Checked : {feed.title}")
 	return
-
 scheduler = AsyncIOScheduler()
-#scheduler.add_job(u_h20, "interval", seconds=1, max_instances=5)
+scheduler.add_job(u_h20, "interval", seconds=1, max_instances=5)
 scheduler.add_job(u_gogo, "interval", seconds=1, max_instances=5)
 scheduler.start()
