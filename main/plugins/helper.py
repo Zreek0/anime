@@ -93,8 +93,8 @@ class h20:
    n = n.find("a", href=re.compile(data["href"]))
    if n:
     self.links.append(n["href"])
-    regex = r"{}.*chapter.*-(\d+)".format(data["href"])
-    self.chapters.append(re.match(regex, n["href"]).group(1))
+    regex = r"{}.*chapter-(\d.+)".format(data["href"])
+    self.chapters.append(re.match(regex, n["href"]).group(1).replace("/", ""))
     continue
   self.chapters.reverse()
   self.links.reverse()
