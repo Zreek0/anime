@@ -99,12 +99,16 @@ class h20:
   self.chapters.reverse()
   self.links.reverse()
 
-class u_manga:
- def __init__(self):
-  r = requests.get("https://manganato.com/genre-all")
-  soup = BeautifulSoup(r.text, "html.parser")
-  data = soup.find("a", "genres-item-chap text-nowrap a-h")
-  regex = r"[^.]hapter.* (\d+)"
-  self.title = data["title"].split("Chapter")[0].strip()
-  self.link = data["href"]
-  self.chapter = re.match(regex, data.text).group(1)
+class u_manga():
+	def __init__(self):
+		response = cloudscraper.create_scraper().get("https://manganato.com/")
+		response.raise_for_status()
+		soup = BeautifulSoup(response.text, "html.parser")
+		data = soup.find("div", "content-homepage-item-right").find_all("p", "a-h item-chapter")
+		self.title = None
+		self.links = []
+		for elem in data:
+			if "mins" in elem.i.text:
+				self.links.append(elem.a["href"])
+				self.title = elem.a["title"].split("Chapter ")[0].strip()
+		self.links.reverse()
