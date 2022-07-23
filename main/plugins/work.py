@@ -30,8 +30,8 @@ async def u_h20():
 	hentai_20 = h20()
 	for link in hentai_20.links:
 		if link != db.get("H20").link:
+			db.update("H20", link)
 			try:
-				db.update("H20", link)
 				regex = r"{}.*chapter.*-(\d+)".format("https://hentai20.com/")
 				ch = re.match(regex, link).group(1)
 				pdfname = await post_ws(link, hentai_20.title, ch)
