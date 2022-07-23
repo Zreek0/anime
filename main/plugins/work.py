@@ -26,6 +26,26 @@ async def u_gogo(rss_link=rss):
 		print(f"Checked : {entry.link}")
 	return
 
+async def u_h20():
+	hentai_20 = h20()
+	for link in hentai_20.links:
+		if link != db.get("H20").link:
+			try:
+				db.update("H20", link)
+				regex = r"{}.*chapter.*-(\d+)".format("https://hentai20.com/")
+				ch = re.match(regex, link).group(1)
+				pdfname = await post_ws(link, hentai_20.title, ch)
+				await app.send_document(-1001676231026, pdfname)
+				os.remove(pdfname)
+			except Exception as e:
+				await app.send_message(-1001676231026, f"**Error :** `{e}`")
+				pass
+		else:
+			print(f"Checked : {hentai_20.title}")
+			break
+	return
+
 scheduler = AsyncIOScheduler()
+scheduler.add_job(u_h20, "interval", seconds=1)
 scheduler.add_job(u_gogo, "interval", seconds=1, max_instances=5)
 scheduler.start()
