@@ -30,7 +30,7 @@ async def upload_h20(h20, chat, upload_chat):
 	mess = "**New Chapter uploaded on hentai20.com :**\n\n"
 	for link, ch in zip(h20.links, h20.chapters):
 		mess += f"• [{h20.title} - Chapter {ch}]({link})\n"
-	post = await bot.send_message(chat, post)
+	post = await bot.send_message(chat, mess)
 	for link, ch in zip(h20.links, h20.chapters):
 		try:
 			pdfname = await post_ws(link, h20.title, ch)
