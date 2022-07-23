@@ -81,7 +81,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 
 class h20:
  def __init__(self):
-  response = requests.get("https://hentai20.com/")
+  response = cloudscraper.create_scraper().get("https://hentai20.com/")
   response.raise_for_status()
   soup = BeautifulSoup(response.text, "html.parser")
   data = soup.find("div", "item-summary").find("a")
