@@ -12,9 +12,10 @@ lxml
 bs4
 feedparser
 apscheduler
-ffmpeg-python
 AnilistPython 
 reportlab
 cloudscraper
 img2pdf
 aiofiles
+python-Levenshtein 
+thefuzz
