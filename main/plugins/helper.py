@@ -112,3 +112,5 @@ class u_manga():
 				self.links.append(elem.a["href"])
 				self.title = elem.a["title"].split("Chapter ")[0].strip()
 		self.links.reverse()
+def w_name(name: str):
+	return name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
