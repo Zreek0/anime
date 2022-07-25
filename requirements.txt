@@ -17,5 +17,6 @@ reportlab
 cloudscraper
 img2pdf
 aiofiles
+ffmpeg-python
 python-Levenshtein 
 thefuzz
